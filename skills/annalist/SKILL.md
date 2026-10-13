@@ -1,6 +1,6 @@
 ---
 name: annalist
-description: Signed, pay-per-call data on Hyperliquid for trading and research questions. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded or overheated, what usually happened after similar moves or funding extremes, how Hyperliquid's most profitable traders are positioned, where liquidations sit and whether the order book can absorb them, what stock, commodity or FX perps on Hyperliquid are doing (xyz:NVDA), Hyperliquid prediction-market odds (sports, Fed, IPOs), or where Hyperliquid's HLP vault is exposed. Also use it before paying an x402 service (is it up, does it charge what it lists, are its customers real, did its listing or payout wallet change, what do similar services charge) or connecting an MCP server (is it up, does it need sign-in, did its tools change). A free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
+description: Signed, pay-per-call data for agents. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded or overheated, what usually happened after similar moves or funding extremes, how Hyperliquid's most profitable traders are positioned, where liquidations sit, what stock, commodity or FX perps on Hyperliquid are doing (xyz:NVDA), Hyperliquid prediction-market odds, or where its HLP vault is exposed. Also use it before paying an x402 service (is it up, does it charge what it lists, are its customers real, did its listing or payout wallet change, what do similar services charge), before connecting an MCP server (is it up, does it need sign-in, did its tools change), or before adding an npm or PyPI dependency (did it change hands, add install scripts or lose provenance). Free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
 ---
 
 # Annalist: Hyperliquid data for agents
@@ -49,6 +49,8 @@ whose daily hashes are published and Bitcoin-timestamped.
 | What changed in x402 listings: which services changed prices, endpoints or payout wallets? | `GET /v1/checks/changes?days=1` | $0.01 |
 | Is this MCP server up and fast, does it need sign-in, and did its tools change? | `GET /v1/mcp/server?name=io.github.ryanroskowski%2Fannalist` | $0.01 |
 | Which remote MCP servers are most reliable, which changed their tools this week, and which are flagged? | `GET /v1/mcp/top` | $0.02 |
+| Should my agent depend on this npm or PyPI package, and did it just change hands? | `GET /v1/packages/check?ecosystem=npm&name=lodash` | $0.01 |
+| Which popular npm and PyPI packages changed hands or added risky behaviour recently? | `GET /v1/packages/watch?days=7` | $0.02 |
 | How has this x402 service's pricing changed, and is it cheap or expensive for its category? | `GET /v1/prices/service?host=api.annalist.dev` | $0.01 |
 | What do x402 services usually charge for this kind of call, and is this price fair? | `GET /v1/prices/benchmarks?tag=search&price=0.02` | $0.01 |
 
