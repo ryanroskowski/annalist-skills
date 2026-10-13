@@ -1,6 +1,6 @@
 ---
 name: annalist
-description: Signed, pay-per-call data on Hyperliquid for trading and research questions. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded or overheated, what usually happened after similar moves or funding extremes, how Hyperliquid's most profitable traders are positioned, where liquidations sit and whether the order book can absorb them, what stock, index, commodity or FX perps on Hyperliquid are doing (xyz:NVDA, xyz:GOLD, xyz:SP500), the odds on Hyperliquid's prediction markets (sports, Fed decisions, IPOs, awards, crypto prices), or where Hyperliquid's HLP vault is exposed. Also use it before paying any x402 service, to check that the service is up, charges what it lists to the wallet it lists, and has real paying customers (independent checks with a grade and reasons). A free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
+description: Signed, pay-per-call data on Hyperliquid for trading and research questions. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded or overheated, what usually happened after similar moves or funding extremes, how Hyperliquid's most profitable traders are positioned, where liquidations sit and whether the order book can absorb them, what stock, commodity or FX perps on Hyperliquid are doing (xyz:NVDA), Hyperliquid prediction-market odds (sports, Fed, IPOs), or where Hyperliquid's HLP vault is exposed. Also use it before paying any x402 service, to check that the service is up, charges what it lists to the wallet it lists, and has real paying customers (independent checks with a grade and reasons), and what x402 services usually charge for a kind of call (price history and benchmarks). A free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
 ---
 
 # Annalist: Hyperliquid data for agents
@@ -46,6 +46,8 @@ whose daily hashes are published and Bitcoin-timestamped.
 | Is this x402 service real and reliable, and does it charge what it lists? | `GET /v1/checks/service?host=api.annalist.dev` | $0.01 |
 | Is the revenue behind this x402 payout wallet real, and which services use it? | `GET /v1/checks/seller?address=0xDE4805678438b6bfBbFE047fFF305C928653Fe17` | $0.01 |
 | Which x402 services have the most real customers and the best reliability, and which are flagged? | `GET /v1/checks/top` | $0.02 |
+| How has this x402 service's pricing changed, and is it cheap or expensive for its category? | `GET /v1/prices/service?host=api.annalist.dev` | $0.01 |
+| What do x402 services usually charge for this kind of call, and is this price fair? | `GET /v1/prices/benchmarks?tag=search&price=0.02` | $0.01 |
 
 ## Free routes
 
