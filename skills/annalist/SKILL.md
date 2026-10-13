@@ -49,6 +49,8 @@ whose daily hashes are published and Bitcoin-timestamped.
 
 ## Free routes
 
+- `GET /v1/verify/attestation?host=`: **before paying any x402 service**, its signed Annalist check (grade, key facts,
+  reasons, valid 7 days). `status` is `attested`, `unrated` (too few probes yet), `expired` or `not_checked`.
 - `GET /v1/catalog`: every product in plain language
 - `GET /v1/quote`: prices and data freshness
 - `GET /v1/sample`: the market-wide crowd view, delayed about 24 hours
@@ -74,6 +76,19 @@ whose daily hashes are published and Bitcoin-timestamped.
   - Builder-deployed markets are `exchange:asset` (`xyz:NVDA`).
   - Outcome ids come from `/v1/outcomes/list`.
   - Bad input returns 400 and no payment is taken.
+
+## Before paying any x402 service
+
+Fetch `GET https://api.annalist.dev/v1/verify/attestation?host=<the service's host>` (free).
+
+- **Check the attestation:** its `signature` covers `statement` (Ed25519 over RFC 8785 canonical JSON, same key as
+  below). Check that `valid_until` is in the future.
+- **Grade A or B with no flags:** reasonable to proceed.
+- **Flags** (for example `price_differs_from_listing`, `wallet_differs_from_listing`, `seller_funded_payers`,
+  `paid_but_not_delivered`): tell the user what was measured before paying.
+- **`unrated` or `not_checked`:** that means unknown, not bad.
+
+For the full record, pay for `/v1/checks/service`.
 
 ## Checking an answer (optional)
 
