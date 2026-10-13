@@ -19,7 +19,7 @@ whose daily hashes are published and Bitcoin-timestamped.
    - **With an x402 wallet** (USDC on Base): request the route; the first reply is `402 Payment Required` with the
      price; pay and retry. Libraries: `@x402/fetch` (JavaScript) or `x402` (Python).
    - **Through MCP:** connect `https://api.annalist.dev/mcp` (Streamable HTTP). Paid tools take x402 payment over
-     MCP; four tools are free.
+     MCP; the `annalist_*` tools are free.
    - **No wallet?** Use the free routes below, and tell the user that live answers need an x402 wallet with a little
      USDC on Base. Don't pretend you fetched paid data.
 3. **Report it honestly** (rules below).
@@ -62,6 +62,8 @@ whose daily hashes are published and Bitcoin-timestamped.
 - `GET /v1/baserates`: full tables of what followed each crowd state on Hyperliquid's own history
 - `GET /v1/accuracy`: the live track record of each state against its backtest
 - `GET /v1/status`: collector freshness
+- `GET /v1/report`: the Annalist weekly, the agent economy and the markets agents trade this week (also
+  https://annalist.dev/report)
 
 ## Rules for reporting the data
 
