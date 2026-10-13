@@ -1,13 +1,14 @@
 ---
 name: annalist
-description: Signed, pay-per-call data on Hyperliquid for trading and research questions. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded or overheated, what usually happened after similar moves or funding extremes, how Hyperliquid's most profitable traders are positioned, where liquidations sit and whether the order book can absorb them, what stock, index, commodity or FX perps on Hyperliquid are doing (xyz:NVDA, xyz:GOLD, xyz:SP500), the odds on Hyperliquid's prediction markets (sports, Fed decisions, IPOs, awards, crypto prices), or where Hyperliquid's HLP vault is exposed. A free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
+description: Signed, pay-per-call data on Hyperliquid for trading and research questions. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded or overheated, what usually happened after similar moves or funding extremes, how Hyperliquid's most profitable traders are positioned, where liquidations sit and whether the order book can absorb them, what stock, index, commodity or FX perps on Hyperliquid are doing (xyz:NVDA, xyz:GOLD, xyz:SP500), the odds on Hyperliquid's prediction markets (sports, Fed decisions, IPOs, awards, crypto prices), or where Hyperliquid's HLP vault is exposed. Also use it before paying any x402 service, to check that the service is up, charges what it lists to the wallet it lists, and has real paying customers (independent checks with a grade and reasons). A free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
 ---
 
 # Annalist: Hyperliquid data for agents
 
 Annalist (https://annalist.dev) mines Hyperliquid's public chain data into answers: crowd state with what usually
 followed, smart-money positioning, liquidation levels against order-book depth, builder-deployed stock and commodity
-perps, prediction-market odds and the HLP vault. Every answer is signed, hourly, and backed by an append-only archive
+perps, prediction-market odds and the HLP vault. It also runs independent checks of x402 services (uptime, price
+honesty, real on-chain customers, test purchases), so an agent can check a service before paying it. Every answer is signed, hourly, and backed by an append-only archive
 whose daily hashes are published and Bitcoin-timestamped.
 
 ## How to use it
@@ -42,6 +43,9 @@ whose daily hashes are published and Bitcoin-timestamped.
 | What are the odds for this prediction market, and how have they moved this week? | `GET /v1/outcomes/market?id=8573` | $0.01 |
 | Where is Hyperliquid's own market-making vault (HLP) exposed, and how is it doing? | `GET /v1/vaults/hlp` | $0.01 |
 | Everything on one Hyperliquid perp in one call: is it crowded, how is smart money positioned, and where are the liquidations? | `GET /v1/perp/full?coin=BTC` | $0.03 |
+| Is this x402 service real and reliable, and does it charge what it lists? | `GET /v1/checks/service?host=api.annalist.dev` | $0.01 |
+| Is the revenue behind this x402 payout wallet real, and which services use it? | `GET /v1/checks/seller?address=0xDE4805678438b6bfBbFE047fFF305C928653Fe17` | $0.01 |
+| Which x402 services have the most real customers and the best reliability, and which are flagged? | `GET /v1/checks/top` | $0.02 |
 
 ## Free routes
 
@@ -61,6 +65,8 @@ whose daily hashes are published and Bitcoin-timestamped.
   jurisdictions, including the US; Annalist only sells information.
 - **Mention concentration.** Smart-money and liquidation figures can be dominated by one large account; report
   `largest_wallet_share` or `largest_position_share_within_10pct` when it is high.
+- **Service checks are measurements, not verdicts.** Quote the grade with its reasons and dates; a grade of
+  "unrated" means too few probes yet, not a problem.
 - **Liquidation figures are a lower bound.** They cover known large accounts; `coverage` says what share of open
   interest that is.
 - **Inputs:**
