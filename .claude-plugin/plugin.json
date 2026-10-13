@@ -1,0 +1,12 @@
+{
+  "name": "annalist",
+  "description": "Signed Hyperliquid data for agents: crowd state with base rates, smart money, liquidation levels, stock and commodity perps, prediction-market odds and the HLP vault. Pay per call over x402 or MCP.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Annalist",
+    "url": "https://annalist.dev"
+  },
+  "homepage": "https://annalist.dev",
+  "repository": "https://github.com/ryanroskowski/annalist-skills",
+  "license": "MIT"
+}

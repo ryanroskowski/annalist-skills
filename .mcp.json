@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "annalist": { "type": "http", "url": "https://api.annalist.dev/mcp" }
+  }
+}

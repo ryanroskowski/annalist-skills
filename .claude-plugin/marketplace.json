@@ -1,0 +1,15 @@
+{
+  "name": "annalist",
+  "description": "Annalist's agent skill and MCP server: signed, pay-per-call Hyperliquid data.",
+  "owner": {
+    "name": "Annalist",
+    "url": "https://annalist.dev"
+  },
+  "plugins": [
+    {
+      "name": "annalist",
+      "source": "./",
+      "description": "Signed Hyperliquid data for agents: crowd state with base rates, smart money, liquidation levels, stock and commodity perps, prediction-market odds and the HLP vault."
+    }
+  ]
+}
