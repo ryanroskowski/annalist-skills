@@ -123,6 +123,9 @@ For the full record, pay for `/v1/checks/service`.
   changes). For the full record with the tool-change history, pay for `GET /v1/mcp/server?url=<its URL>` (or `name=`
   from the Official MCP Registry) and look at uptime, sign-in mode and `tools.changes_30d`. If `tools_changed_14d` is
   true, tell the user before they approve the server; the paid record lists which tools changed.
+- **Finding an MCP server for a task:** `GET /registry/v0.1/servers?search=<word in the name>` (free) lists servers
+  we grade A to C that were up at their last check, in the Official MCP Registry's format, with our checks under
+  `_meta["dev.annalist/checks"]`.
 - **Package:** `GET /v1/packages/check?ecosystem=npm|pypi|crates|go&name=<package>`. Read `signals`. Recent
   `new_publisher`, `install_script_added`, `provenance_dropped` or `origin_changed` are worth a look before
   upgrading.
