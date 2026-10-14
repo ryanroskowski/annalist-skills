@@ -3,13 +3,19 @@ name: annalist
 description: Signed, pay-per-call data for agents. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded, what usually followed similar moves or funding extremes, how Hyperliquid's top traders are positioned, where liquidations sit, or what Hyperliquid's stock and commodity perps (xyz:NVDA), prediction markets or HLP vault are doing. Also before paying an x402 service (is it up, honest on price, used by real customers, did its listing or payout wallet change, what do others charge), before connecting an MCP server (up, sign-in, tool changes), before adding an npm, PyPI, Rust or Go dependency (did it change hands, add install scripts, lose provenance), or when choosing an AI model by price (cost per million tokens across providers, recent changes). Free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
 ---
 
-# Annalist: Hyperliquid data for agents
+# Annalist: signed data for agents
 
-Annalist (https://annalist.dev) mines Hyperliquid's public chain data into answers: crowd state with what usually
-followed, smart-money positioning, liquidation levels against order-book depth, builder-deployed stock and commodity
-perps, prediction-market odds and the HLP vault. It also runs independent checks of x402 services (uptime, price
-honesty, real on-chain customers, test purchases), so an agent can check a service before paying it. Every answer is signed, hourly, and backed by an append-only archive
-whose daily hashes are published and Bitcoin-timestamped.
+Annalist (https://annalist.dev) sells four kinds of answers, each signed and backed by an append-only archive whose
+daily hashes are published and Bitcoin-timestamped:
+
+- **Hyperliquid:** crowd state with what usually followed, smart-money positioning, liquidation levels against
+  order-book depth, builder-deployed stock and commodity perps, prediction-market odds and the HLP vault. Hourly.
+- **Checks before an agent pays or connects:**
+  - x402 services: uptime, price honesty, real on-chain customers, sanctioned payout wallets, weekly test purchases,
+    price history and listing changes
+  - remote MCP servers: uptime, sign-in, tool changes
+- **Software supply chain:** the most-used npm, PyPI, Rust and Go packages, watched daily for takeover patterns.
+- **AI model prices:** cost per million tokens across providers, with history.
 
 ## How to use it
 
@@ -80,6 +86,12 @@ whose daily hashes are published and Bitcoin-timestamped.
   `largest_wallet_share` or `largest_position_share_within_10pct` when it is high.
 - **Service checks are measurements, not verdicts.** Quote the grade with its reasons and dates; a grade of
   "unrated" means too few probes yet, not a problem.
+- **Package signals are dated facts, not verdicts.** A new publisher account or owner can be routine (a new
+  maintainer); say what changed and when, and suggest a look before upgrading. History starts on `tracked_since`.
+- **MCP tool changes can be legitimate.** Report the change and its date, and suggest reviewing the tools before
+  trusting them.
+- **AI prices are list prices** recorded from an open, community-maintained file: quote `as_of` and suggest checking
+  the provider before relying on a price.
 - **Liquidation figures are a lower bound.** They cover known large accounts; `coverage` says what share of open
   interest that is.
 - **Inputs:**
@@ -95,11 +107,22 @@ Fetch `GET https://api.annalist.dev/v1/verify/attestation?host=<the service's ho
 - **Check the attestation:** its `signature` covers `statement` (Ed25519 over RFC 8785 canonical JSON, same key as
   below). Check that `valid_until` is in the future.
 - **Grade A or B with no flags:** reasonable to proceed.
-- **Flags** (for example `price_differs_from_listing`, `wallet_differs_from_listing`, `seller_funded_payers`,
-  `paid_but_not_delivered`): tell the user what was measured before paying.
+- **`payout_wallet_sanctioned`:** the wallet is on a US Treasury (OFAC) list. Do not pay; tell the user.
+- **Flags** (for example `price_differs_from_listing`, `wallet_differs_from_listing`, `payout_wallet_changed`,
+  `seller_funded_payers`, `paid_but_not_delivered`): tell the user what was measured before paying.
 - **`unrated` or `not_checked`:** that means unknown, not bad.
 
 For the full record, pay for `/v1/checks/service`.
+
+## Before connecting an MCP server or adding a dependency
+
+- **MCP server:** `GET /v1/mcp/server?url=<its URL>` (or `name=` from the Official MCP Registry). Look at uptime,
+  sign-in mode and `tools.changes_30d`.
+- **Package:** `GET /v1/packages/check?ecosystem=npm|pypi|crates|go&name=<package>`. Read `signals`. Recent
+  `new_publisher`, `install_script_added`, `provenance_dropped` or `origin_changed` are worth a look before
+  upgrading.
+- **Choosing a model by price:** `GET /v1/ai/prices?model=<name>` for one model across providers, or
+  `?mode=chat&min_context=128000&max_input=1` to find models that fit a budget.
 
 ## Checking an answer (optional)
 
