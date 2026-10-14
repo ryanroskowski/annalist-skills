@@ -66,6 +66,9 @@ daily hashes are published and Bitcoin-timestamped:
 
 - `GET /v1/verify/attestation?host=`: **before paying any x402 service**, its signed Annalist check (grade, key facts,
   reasons, valid 7 days). `status` is `attested`, `unrated` (too few probes yet), `expired` or `not_checked`.
+- `GET /v1/verify/mcp?url=` (or `name=`): **before connecting an MCP server**, its signed check (grade, uptime,
+  connect time, sign-in mode, whether its tools changed recently, reasons; valid 7 days). Same `status` values, plus
+  `ambiguous` when several registry servers share a host (ask by name or exact URL).
 - `GET /v1/catalog`: every product in plain language
 - `GET /v1/quote`: prices and data freshness
 - `GET /v1/sample`: the market-wide crowd view, delayed about 24 hours
@@ -116,8 +119,10 @@ For the full record, pay for `/v1/checks/service`.
 
 ## Before connecting an MCP server or adding a dependency
 
-- **MCP server:** `GET /v1/mcp/server?url=<its URL>` (or `name=` from the Official MCP Registry). Look at uptime,
-  sign-in mode and `tools.changes_30d`.
+- **MCP server:** start with the free `GET /v1/verify/mcp?url=<its URL>` (grade, uptime, sign-in, recent tool
+  changes). For the full record with the tool-change history, pay for `GET /v1/mcp/server?url=<its URL>` (or `name=`
+  from the Official MCP Registry) and look at uptime, sign-in mode and `tools.changes_30d`. If `tools_changed_14d` is
+  true, tell the user before they approve the server; the paid record lists which tools changed.
 - **Package:** `GET /v1/packages/check?ecosystem=npm|pypi|crates|go&name=<package>`. Read `signals`. Recent
   `new_publisher`, `install_script_added`, `provenance_dropped` or `origin_changed` are worth a look before
   upgrading.

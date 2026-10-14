@@ -54,6 +54,7 @@ Agents without an x402 wallet can still use the free routes:
 
 - `/v1/catalog`: every product, with its price
 - `/v1/verify/attestation?host=`: an x402 service's signed check before paying it
+- `/v1/verify/mcp?url=`: an MCP server's signed check before connecting it
 - `/v1/report`: the Annalist weekly, the agent economy this week
 - `/v1/quote` and `/v1/status`: prices and freshness
 - `/v1/sample`, `/v1/baserates` and `/v1/accuracy`: Hyperliquid samples, base rates and track record
