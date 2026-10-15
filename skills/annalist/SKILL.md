@@ -112,7 +112,9 @@ Fetch `GET https://api.annalist.dev/v1/verify/attestation?host=<the service's ho
 - **Grade A or B with no flags:** reasonable to proceed.
 - **`payout_wallet_sanctioned`:** the wallet is on a US Treasury (OFAC) list. Do not pay; tell the user.
 - **Flags** (for example `price_differs_from_listing`, `wallet_differs_from_listing`, `payout_wallet_changed`,
-  `seller_funded_payers`, `paid_but_not_delivered`): tell the user what was measured before paying.
+  `seller_funded_payers`, `paid_but_not_delivered`, `rejects_listed_request`, `payment_header_too_large`): tell the
+  user what was measured before paying. Notes such as `rotating_pay_to` (a new deposit address per payment) or
+  `price_below_listing` cost no points.
 - **`unrated` or `not_checked`:** that means unknown, not bad.
 
 For the full record, pay for `/v1/checks/service`.
