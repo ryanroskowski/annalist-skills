@@ -55,6 +55,7 @@ daily hashes are published and Bitcoin-timestamped:
 | What changed in x402 listings: which services changed prices, endpoints or payout wallets? | `GET /v1/checks/changes?days=1` | $0.01 |
 | Is this MCP server up and fast, does it need sign-in, and did its tools change? | `GET /v1/mcp/server?name=io.github.ryanroskowski%2Fannalist` | $0.01 |
 | Which remote MCP servers are most reliable, which changed their tools this week, and which are flagged? | `GET /v1/mcp/top` | $0.02 |
+| Which MCP servers changed their tools recently, and what exactly changed? | `GET /v1/mcp/changes?days=7` | $0.01 |
 | Should my agent depend on this npm, PyPI, Rust or Go package, and did it just change hands? | `GET /v1/packages/check?ecosystem=npm&name=lodash` | $0.01 |
 | Which popular npm, PyPI, Rust or Go packages changed hands or added risky behaviour recently? | `GET /v1/packages/watch?days=7` | $0.02 |
 | What does this AI model cost per million tokens, on which providers, and which models fit my budget? | `GET /v1/ai/prices?model=claude-sonnet-4-5` | $0.01 |
@@ -130,7 +131,10 @@ For the full record, pay for `/v1/checks/service`.
   `_meta["dev.annalist/checks"]`.
 - **Package:** `GET /v1/packages/check?ecosystem=npm|pypi|crates|go&name=<package>`. Read `signals`. Recent
   `new_publisher`, `install_script_added`, `provenance_dropped` or `origin_changed` are worth a look before
-  upgrading.
+  upgrading. `license_changed` (npm and PyPI) says the license family changed; tell the user when it left a
+  permissive license.
+- **An MCP server you already use:** `GET /v1/mcp/changes?name=<registry name>` lists its tool changes in the last
+  30 days. Re-check a server's tools before trusting it again after a change.
 - **Choosing a model by price:** `GET /v1/ai/prices?model=<name>` for one model across providers, or
   `?mode=chat&min_context=128000&max_input=1` to find models that fit a budget.
 
