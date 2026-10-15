@@ -22,12 +22,12 @@ daily hashes are published and Bitcoin-timestamped:
 1. **Find the product (free).** `GET https://api.annalist.dev/v1/catalog` lists every product with the question it
    answers, its price, an example call and its MCP tool name. The table below is a snapshot.
 2. **Call it.**
-   - **With an x402 wallet** (USDC on Base): request the route; the first reply is `402 Payment Required` with the
+   - **With an x402 wallet** (USDC on Base or Solana): request the route; the first reply is `402 Payment Required` with the
      price; pay and retry. Libraries: `@x402/fetch` (JavaScript) or `x402` (Python).
    - **Through MCP:** connect `https://api.annalist.dev/mcp` (Streamable HTTP). Paid tools take x402 payment over
      MCP; the `annalist_*` tools are free.
    - **No wallet?** Use the free routes below, and tell the user that live answers need an x402 wallet with a little
-     USDC on Base. Don't pretend you fetched paid data.
+     USDC on Base or Solana. Don't pretend you fetched paid data.
 3. **Report it honestly** (rules below).
 
 ## Which route answers which question

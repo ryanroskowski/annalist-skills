@@ -47,7 +47,7 @@ folder, for example:
 
 ## Paying
 
-Paid answers cost $0.005 to $0.05 in USDC on Base. They are paid per call over [x402](https://x402.org), directly or
+Paid answers cost $0.005 to $0.05 in USDC on Base or Solana. They are paid per call over [x402](https://x402.org), directly or
 through MCP. There are no accounts and no API keys.
 
 Agents without an x402 wallet can still use the free routes:
