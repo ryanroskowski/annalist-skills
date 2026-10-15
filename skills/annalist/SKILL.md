@@ -1,6 +1,6 @@
 ---
 name: annalist
-description: Signed, pay-per-call data for agents. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded, what usually followed similar moves or funding extremes, how Hyperliquid's top traders are positioned, where liquidations sit, or what Hyperliquid's stock and commodity perps (xyz:NVDA), prediction markets or HLP vault are doing. Also before paying an x402 service (is it up, honest on price, used by real customers, did its listing or payout wallet change, what do others charge), before connecting an MCP server (up, sign-in, tool changes), before adding an npm, PyPI, Rust or Go dependency (did it change hands, add install scripts, lose provenance), or when choosing an AI model by price (cost per million tokens across providers, recent changes). Free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
+description: Signed, pay-per-call data for agents. Use when the user asks whether a crypto perpetual (BTC, ETH, SOL, HYPE and others) is crowded, what usually followed similar moves or funding extremes, how Hyperliquid's top traders are positioned, where liquidations sit, or what Hyperliquid's stock and commodity perps (xyz:NVDA), prediction markets or HLP vault are doing. Also before paying an x402 service (is it up, honest on price, used by real customers, did its listing or payout wallet change, what do others charge), before connecting an MCP server (up, sign-in, tool changes), before adding an npm, PyPI, Rust or Go dependency (did it change hands, add install scripts, lose provenance), when choosing an AI model by price, or before buying from an online store (does it take agent checkout, ship to the user, block AI agents). Free catalog, sample, base rates and track record; paid answers cost $0.005 to $0.05 in USDC over x402 or MCP.
 ---
 
 # Annalist: signed data for agents
@@ -124,7 +124,8 @@ Fetch `GET https://api.annalist.dev/v1/verify/attestation?host=<the service's ho
   `price_below_listing` cost no points.
 - **`unrated` or `not_checked`:** that means unknown, not bad.
 
-For the full record, pay for `/v1/checks/service`.
+For the full record, pay for `/v1/checks/service`. To compare sellers of one kind, `GET /v1/checks/top?category=shopping`
+(or ai-inference, crypto-data, search-web and others) has that category's most-used, most reliable and flagged sellers.
 
 ## Before connecting an MCP server or adding a dependency
 
