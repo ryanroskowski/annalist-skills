@@ -60,6 +60,7 @@ daily hashes are published and Bitcoin-timestamped:
 | Can an agent shop or work on this site: does it accept agent checkout, and does it let my crawler in? | `GET /v1/web/readiness?domain=allbirds.com` | $0.005 |
 | Which stores can shopping agents buy from, and how fast is agent checkout spreading? | `GET /v1/web/census?signal=ucp` | $0.01 |
 | Which stores ship to my country, take my payment method and let an agent check out? | `GET /v1/commerce/stores?ships_to=US&capability=checkout` | $0.01 |
+| What changed, or needs a look, in everything my agent depends on? | `GET /v1/deps/digest?npm=express%2Clodash&apis=stripe&models=gpt-4o&days=7` | $0.02 |
 | Did the APIs my agent calls change their contracts, and would the change break my calls? | `GET /v1/apis/changes?days=30` | $0.01 |
 | What does this API's contract look like today, and how has it changed? | `GET /v1/apis/api?name=stripe` | $0.005 |
 | Should my agent depend on this npm, PyPI, Rust or Go package, and did it just change hands? | `GET /v1/packages/check?ecosystem=npm&name=lodash` | $0.01 |
@@ -153,6 +154,10 @@ For the full record, pay for `/v1/checks/service`. To compare sellers of one kin
 - **Finding a store to buy from:** `GET /v1/commerce/stores?ships_to=<country>&capability=checkout` lists stores that
   ship there and accept UCP agent checkout, with each store's UCP MCP endpoint, payment handlers (add
   `payment=google.pay`), currency and, where published, return window (`min_return_days=30`).
+- **Weekly dependency check:** `GET /v1/deps/digest?npm=<a,b>&pypi=<c>&apis=<stripe,github>&models=<gpt-4o>&mcp=<registry name>&x402=<host>&days=7`
+  returns, in one call, what changed or needs a look across all of them (`attention` first). Run it on a schedule.
+- **Before shopping on a site, free:** `GET /v1/verify/store?domain=<site>` is a signed short answer (agent checkout,
+  endpoint, payment handlers, AI agents blocked).
 - **Before building on a model:** `GET /v1/ai/retirements?model=<name>` shows when it shuts down on each platform
   (dates differ between platforms) and what replaces it. Without `model`, it lists the shutdowns coming up.
 
