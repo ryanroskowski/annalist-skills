@@ -56,6 +56,7 @@ daily hashes are published and Bitcoin-timestamped:
 | Is this MCP server up and fast, does it need sign-in, and did its tools change? | `GET /v1/mcp/server?name=io.github.ryanroskowski%2Fannalist` | $0.01 |
 | Which remote MCP servers are most reliable, which changed their tools this week, and which are flagged? | `GET /v1/mcp/top` | $0.02 |
 | Which MCP servers changed their tools recently, and what exactly changed? | `GET /v1/mcp/changes?days=7` | $0.01 |
+| When will this AI model be shut down on each platform, and what replaces it? | `GET /v1/ai/retirements?model=gpt-4o` | $0.005 |
 | Should my agent depend on this npm, PyPI, Rust or Go package, and did it just change hands? | `GET /v1/packages/check?ecosystem=npm&name=lodash` | $0.01 |
 | Which popular npm, PyPI, Rust or Go packages changed hands or added risky behaviour recently? | `GET /v1/packages/watch?days=7` | $0.02 |
 | What does this AI model cost per million tokens, on which providers, and which models fit my budget? | `GET /v1/ai/prices?model=claude-sonnet-4-5` | $0.01 |
@@ -137,6 +138,8 @@ For the full record, pay for `/v1/checks/service`.
   30 days. Re-check a server's tools before trusting it again after a change.
 - **Choosing a model by price:** `GET /v1/ai/prices?model=<name>` for one model across providers, or
   `?mode=chat&min_context=128000&max_input=1` to find models that fit a budget.
+- **Before building on a model:** `GET /v1/ai/retirements?model=<name>` shows when it shuts down on each platform
+  (dates differ between platforms) and what replaces it. Without `model`, it lists the shutdowns coming up.
 
 ## Checking an answer (optional)
 
