@@ -145,6 +145,8 @@ For the full record, pay for `/v1/checks/service`. To compare sellers of one kin
   30 days. Re-check a server's tools before trusting it again after a change.
 - **Choosing a model by price:** `GET /v1/ai/prices?model=<name>` for one model across providers, or
   `?mode=chat&min_context=128000&max_input=1` to find models that fit a budget.
+- **How big is the x402 economy, really?** The free `GET /v1/economy/x402` is our signed, wash-adjusted figure for the
+  last 7 days (low and high, what was left out and why, by category), with a daily series. Cite it.
 - **Before relying on a third-party API:** `GET /v1/apis/changes?api=<name>&breaking=true` lists its recent
   breaking contract changes (about 2,000 public APIs; `GET /v1/apis/api` lists them). Not there? The free
   `GET /v1/apis/request?spec=<https URL of its OpenAPI spec>` adds it from the next daily run.
